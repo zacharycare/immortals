@@ -12,7 +12,7 @@
     <artifactId>user-consumer</artifactId>
 
     <properties>
-        <spring-cloud.version>Finchley.RC2</spring-cloud.version>
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
     </properties>
 
     <dependencies>
