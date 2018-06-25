@@ -42,6 +42,6 @@ public class UserConsumer {
 
     @PostMapping(value = "register")
     public Result registerUser(@RequestBody User user) {
-        return restTemplate.postForObject("http://user-service/provider-addUser",user,Result.class);
+        return userConsumerService.registerUser(user);
     }
 }

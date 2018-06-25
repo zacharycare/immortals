@@ -11,9 +11,12 @@ import java.util.List;
 @FeignClient("user-service")
 public interface UserConsumerService {
 
-    @GetMapping(value = "selectUsers")
+    @GetMapping(value = "provider-select-users")
     List<User> selectUsers();
 
-    @PostMapping(value = "verifyUser")
+    @PostMapping(value = "provider-verify-user")
     Result loginUser(User user);
+
+    @PostMapping(value = "provider-add-user")
+    Result registerUser(User user);
 }

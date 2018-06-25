@@ -21,7 +21,7 @@ public class UserProvider {
     @Autowired
     UserService userService;
 
-    @GetMapping(value = "selectUsers")
+    @GetMapping(value = "provider-select-users")
     public List<User> selectUsers(){
         return userService.selectList(null);
     }
@@ -31,7 +31,7 @@ public class UserProvider {
      * @param user 包含登录名及密码的User对象
      * @return 返回一个User
      */
-    @PostMapping(value = "verifyUser")
+    @PostMapping(value = "provider-verify-user")
     public Result verifyUser(@RequestBody User user){
         Map<String,Object> params = new HashMap<>();
         params.put("username",user.getUsername());
@@ -54,7 +54,7 @@ public class UserProvider {
      * @param user
      * @return
      */
-    @PostMapping(value = "provider-addUser")
+    @PostMapping(value = "provider-add-user")
     public Result addUser(@RequestBody User user){
         User userdb = userService.selectOne(new EntityWrapper<User>().eq("username",user.getUsername()));
         if (userdb != null) {
