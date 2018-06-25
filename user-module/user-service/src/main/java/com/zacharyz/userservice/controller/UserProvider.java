@@ -3,9 +3,9 @@ package com.zacharyz.userservice.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.zacharyz.common.entity.Result;
 import com.zacharyz.userentity.bean.User;
+import com.zacharyz.userentity.service.UserServiceShare;
 import com.zacharyz.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,22 +16,17 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class UserProvider {
+public class UserProvider implements UserServiceShare {
 
     @Autowired
     UserService userService;
-
-    @GetMapping(value = "provider-select-users")
-    public List<User> selectUsers(){
-        return userService.selectList(null);
-    }
 
     /**
      * 验证用户登录名及密码
      * @param user 包含登录名及密码的User对象
      * @return 返回一个User
      */
-    @PostMapping(value = "provider-verify-user")
+    @Override
     public Result verifyUser(@RequestBody User user){
         Map<String,Object> params = new HashMap<>();
         params.put("username",user.getUsername());
@@ -49,12 +44,7 @@ public class UserProvider {
         }
     }
 
-    /**
-     * 添加用户
-     * @param user
-     * @return
-     */
-    @PostMapping(value = "provider-add-user")
+    @Override
     public Result addUser(@RequestBody User user){
         User userdb = userService.selectOne(new EntityWrapper<User>().eq("username",user.getUsername()));
         if (userdb != null) {
@@ -71,5 +61,10 @@ public class UserProvider {
             return new Result("1","添加成功",user);
         }
         return new Result("1001","操作失败",null);
+    }
+
+    @Override
+    public List<User> selectUsers() {
+        return userService.selectList(null);
     }
 }

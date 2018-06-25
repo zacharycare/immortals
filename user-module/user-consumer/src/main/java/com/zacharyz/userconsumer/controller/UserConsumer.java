@@ -30,18 +30,13 @@ public class UserConsumer {
         return userConsumerService.selectUsers();
     }
 
-    /**
-     * 用户登录
-     * @param user
-     * @return
-     */
-    @PostMapping(value = "feign-login")
-    public Result feignLoginUser(@RequestBody User user){
-        return userConsumerService.loginUser(user);
-    }
-
     @PostMapping(value = "register")
     public Result registerUser(@RequestBody User user) {
-        return userConsumerService.registerUser(user);
+        return userConsumerService.addUser(user);
+    }
+
+    @PostMapping(value = "login")
+    public Result loginUser(@RequestBody User user){
+        return userConsumerService.verifyUser(user);
     }
 }
