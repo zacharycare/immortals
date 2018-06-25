@@ -1,6 +1,7 @@
 package com.zacharyz.userconsumer.controller;
 
 import com.zacharyz.common.entity.Result;
+import com.zacharyz.userconsumer.service.UserConsumerService;
 import com.zacharyz.userentity.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,16 @@ public class UserConsumer {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    UserConsumerService userConsumerService;
+
+    /**
+     * 查询所有用户信息
+     * @return
+     */
     @GetMapping(value = "consumer-users")
-    public List<User> selectUser(){
-        return restTemplate.getForEntity("http://user-service/selectUsers",List.class).getBody();
+    public List<User> feignUsers(){
+        return userConsumerService.selectUsers();
     }
 
     /**
@@ -27,10 +35,9 @@ public class UserConsumer {
      * @param user
      * @return
      */
-    @PostMapping(value = "login")
-    public Result loginUser(@RequestBody User user) {
-        Result result = restTemplate.postForObject("http://user-service/verifyUser",user,Result.class);
-        return result;
+    @PostMapping(value = "feign-login")
+    public Result feignLoginUser(@RequestBody User user){
+        return userConsumerService.loginUser(user);
     }
 
     @PostMapping(value = "register")
