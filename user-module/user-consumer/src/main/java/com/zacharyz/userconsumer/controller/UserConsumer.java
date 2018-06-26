@@ -16,9 +16,6 @@ import java.util.List;
 public class UserConsumer {
 
     @Autowired
-    RestTemplate restTemplate;
-
-    @Autowired
     UserConsumerService userConsumerService;
 
     /**

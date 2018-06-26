@@ -16,9 +16,4 @@ public class UserConsumerApplication {
         SpringApplication.run(UserConsumerApplication.class, args);
     }
 
-    @Bean
-    @LoadBalanced
-    RestTemplate restTemplate(){
-        return new RestTemplate();
-    }
 }
