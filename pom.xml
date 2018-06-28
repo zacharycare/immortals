@@ -12,6 +12,7 @@
         <module>eureka-server</module>
         <module>user-module</module>
         <module>common</module>
+        <module>api-gateway</module>
     </modules>
 
     <parent>
