@@ -2,16 +2,12 @@ spring:
   application:
     name: api-gateway
 server:
-  port: 8080
+  port: 80
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-zuul:
-  routes:
-    api-user-consumer:
-      path: /user-consumer/**
-      serviceId: user-consumer
-    api-user-provider:
-      path: /user-provider/**
-      serviceId: user-service
+#zuul:
+#  routes:
+#    user-consumer: /user-consumer/**
+#    user-service: /user-provider/**
